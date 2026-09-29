@@ -81,7 +81,7 @@ CREATE TABLE membresias (
     fecha_inicio DATE NOT NULL,
     fecha_vencimiento DATE NOT NULL,
     precio_pactado DECIMAL(10,2) NOT NULL,
-    activo TINYINT(1) NOT NULL DEFAULT 1, 
+    estado ENUM('Activa', 'Vencida', 'Por Vencer') NOT NULL DEFAULT 'Activa',
     CONSTRAINT chk_mem_fechas CHECK (fecha_vencimiento >= fecha_inicio), 
     CONSTRAINT chk_precio_pactado CHECK (precio_pactado >= 0),  
     CONSTRAINT fk_mem_socio FOREIGN KEY (id_socio) 
