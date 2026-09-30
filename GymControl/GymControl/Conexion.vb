@@ -1,5 +1,4 @@
 ﻿Imports MySqlConnector
-Imports MySql.Data.MySqlClient
 
 Public Class Conexion
     Private Shared ReadOnly servidor As String = "localhost"
