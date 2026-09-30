@@ -1,6 +1,6 @@
 ﻿Imports MySqlConnector
 
-Public Class Conexion
+Public Class ConexionBD
     Private Shared ReadOnly servidor As String = "localhost"
     Private Shared ReadOnly baseDatos As String = "gimnasio_db"
     Private Shared ReadOnly usuario As String = "gym_app"
