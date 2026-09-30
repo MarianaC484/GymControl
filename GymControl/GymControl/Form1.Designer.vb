@@ -145,10 +145,9 @@ Partial Class frmLogin
         ' 
         ' lblTitulo
         ' 
-        lblTitulo.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         lblTitulo.AutoSize = True
         lblTitulo.Font = New Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTitulo.Location = New Point(272, 59)
+        lblTitulo.Location = New Point(261, 58)
         lblTitulo.Name = "lblTitulo"
         lblTitulo.Size = New Size(276, 60)
         lblTitulo.TabIndex = 2
@@ -167,9 +166,8 @@ Partial Class frmLogin
         ' 
         ' Label1
         ' 
-        Label1.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         Label1.AutoSize = True
-        Label1.Location = New Point(262, 145)
+        Label1.Location = New Point(261, 132)
         Label1.Name = "Label1"
         Label1.Size = New Size(299, 25)
         Label1.TabIndex = 0
@@ -178,13 +176,13 @@ Partial Class frmLogin
         ' lblRestablecimientoContrasena
         ' 
         lblRestablecimientoContrasena.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        lblRestablecimientoContrasena.AutoSize = True
         lblRestablecimientoContrasena.Location = New Point(142, 529)
         lblRestablecimientoContrasena.Name = "lblRestablecimientoContrasena"
         lblRestablecimientoContrasena.Size = New Size(547, 25)
         lblRestablecimientoContrasena.TabIndex = 10
         lblRestablecimientoContrasena.TabStop = True
         lblRestablecimientoContrasena.Text = "¿Olvidó su contraseña? Solicite el restablecimiento al administrador."
+        lblRestablecimientoContrasena.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' frmLogin
         ' 

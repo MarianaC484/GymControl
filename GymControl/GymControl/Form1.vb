@@ -1,5 +1,4 @@
 ﻿Imports GymControl.Seguridad
-Imports MySql.Data.MySqlClient
 Imports MySqlConnector
 Public Class frmLogin
     Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -127,5 +126,12 @@ Public Class frmLogin
                 End Try
             End Using
         End Using
+    End Sub
+
+    Private Sub lblRestablecimientoContrasena_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblRestablecimientoContrasena.LinkClicked
+        MessageBox.Show("Por favor, póngase en contacto con el administrador del sistema en la oficina central o envíe un correo a soporte@gymcontrol.com para restablecer sus credenciales.",
+                  "Recuperación de Cuenta",
+                  MessageBoxButtons.OK,
+                  MessageBoxIcon.Information)
     End Sub
 End Class
