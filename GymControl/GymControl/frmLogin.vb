@@ -69,6 +69,10 @@ Public Class frmLogin
 
                 MessageBox.Show("¡Bienvenido al sistema! Ingreso exitoso.", "Acceso Concedido", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+                Dim principal As New frmPrincipal()
+                principal.Show()
+                Me.Hide()
+
             Else
                 ' ¡CONTRASEÑA INCORRECTA! Incrementar intentos mediante el DAO
                 intentos += 1
@@ -115,5 +119,9 @@ Public Class frmLogin
                   "Recuperación de Cuenta",
                   MessageBoxButtons.OK,
                   MessageBoxIcon.Information)
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
     End Sub
 End Class

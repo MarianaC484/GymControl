@@ -349,3 +349,5 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON gimnasio_db.* TO 'gym_app'@'localhost';
 -- Aplicamos los cambios de permisos en el servidor de MariaDB
 FLUSH PRIVILEGES;
 
+USE gimnasio_db;
+SHOW TABLES;
