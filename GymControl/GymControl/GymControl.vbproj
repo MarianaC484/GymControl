@@ -5,7 +5,6 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
-    <StartupObject>GymControl.My.MyApplication</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
