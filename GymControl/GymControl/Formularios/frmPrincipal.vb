@@ -91,11 +91,10 @@
     ' ==============================
 
     Private Sub mnuInstructores_Click(sender As Object, e As EventArgs) Handles mnuInstructores.Click
-        MessageBox.Show(
-            "El formulario de Instructores todavía no está disponible.",
-            "Módulo pendiente",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information)
+
+        Dim formulario As New FrmInstructores()
+        formulario.Show()
+
     End Sub
 
 
