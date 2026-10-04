@@ -78,11 +78,10 @@
     ' ==============================
 
     Private Sub mnuActividades_Click(sender As Object, e As EventArgs) Handles mnuActividades.Click
-        MessageBox.Show(
-            "El formulario de Actividades todavía no está disponible.",
-            "Módulo pendiente",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information)
+
+        Dim formulario As New FrmActividad()
+        formulario.Show()
+
     End Sub
 
 
