@@ -49,14 +49,16 @@
     ' TIPOS DE MEMBRESÍA
     ' ==============================
 
-    Private Sub mnuTiposMembresia_Click(sender As Object, e As EventArgs) Handles mnuTiposMembresia.Click
-        MessageBox.Show(
-            "El formulario de Tipos de Membresía todavía no está disponible.",
-            "Módulo pendiente",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information)
-    End Sub
+    Private Sub mnuTiposMembresia_Click(
+    sender As Object,
+    e As EventArgs
+) Handles mnuTiposMembresia.Click
 
+        Dim formulario As New FrmTipoDeMembresia()
+
+        formulario.Show()
+
+    End Sub
 
     ' ==============================
     ' HISTORIAL DE PAGOS
@@ -163,6 +165,10 @@
 
         Dim formulario As New frmUsuarios()
         formulario.ShowDialog()
+
+    End Sub
+
+    Private Sub pnlContenido_Paint(sender As Object, e As PaintEventArgs) Handles pnlContenido.Paint
 
     End Sub
 End Class
