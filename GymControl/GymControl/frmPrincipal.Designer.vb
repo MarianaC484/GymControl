@@ -59,8 +59,7 @@ Partial Class frmPrincipal
         menuPrincipal.Items.AddRange(New ToolStripItem() {mnuSocios, mnuMembresias, mnuPagos, mnuHorarios, mnuSistema})
         menuPrincipal.Location = New Point(0, 0)
         menuPrincipal.Name = "menuPrincipal"
-        menuPrincipal.Padding = New Padding(9, 3, 0, 3)
-        menuPrincipal.Size = New Size(1143, 35)
+        menuPrincipal.Size = New Size(800, 24)
         menuPrincipal.TabIndex = 0
         menuPrincipal.Text = "MenuStrip1"
         ' 
@@ -68,181 +67,178 @@ Partial Class frmPrincipal
         ' 
         mnuSocios.DropDownItems.AddRange(New ToolStripItem() {mnuGestionarSocios, mnuConsultarSocios})
         mnuSocios.Name = "mnuSocios"
-        mnuSocios.Size = New Size(80, 29)
+        mnuSocios.Size = New Size(53, 20)
         mnuSocios.Text = "Socios"
         ' 
         ' mnuGestionarSocios
         ' 
         mnuGestionarSocios.Name = "mnuGestionarSocios"
-        mnuGestionarSocios.Size = New Size(270, 34)
+        mnuGestionarSocios.Size = New Size(161, 22)
         mnuGestionarSocios.Text = "Gestionar socios"
         ' 
         ' mnuConsultarSocios
         ' 
         mnuConsultarSocios.Name = "mnuConsultarSocios"
-        mnuConsultarSocios.Size = New Size(270, 34)
+        mnuConsultarSocios.Size = New Size(161, 22)
         mnuConsultarSocios.Text = "Consultar socios"
         ' 
         ' mnuMembresias
         ' 
         mnuMembresias.DropDownItems.AddRange(New ToolStripItem() {mnuGestionarMembresias, mnuTiposMembresia})
         mnuMembresias.Name = "mnuMembresias"
-        mnuMembresias.Size = New Size(124, 29)
+        mnuMembresias.Size = New Size(83, 20)
         mnuMembresias.Text = "Membresías"
         ' 
         ' mnuGestionarMembresias
         ' 
         mnuGestionarMembresias.Name = "mnuGestionarMembresias"
-        mnuGestionarMembresias.Size = New Size(295, 34)
+        mnuGestionarMembresias.Size = New Size(194, 22)
         mnuGestionarMembresias.Text = " Gestionar membresías"
         ' 
         ' mnuTiposMembresia
         ' 
         mnuTiposMembresia.Name = "mnuTiposMembresia"
-        mnuTiposMembresia.Size = New Size(295, 34)
+        mnuTiposMembresia.Size = New Size(194, 22)
         mnuTiposMembresia.Text = "Tipos de membresía"
         ' 
         ' mnuPagos
         ' 
         mnuPagos.DropDownItems.AddRange(New ToolStripItem() {mnuRegistrarPago, mnuHistorialPagos})
         mnuPagos.Name = "mnuPagos"
-        mnuPagos.Size = New Size(76, 29)
+        mnuPagos.Size = New Size(51, 20)
         mnuPagos.Text = "Pagos"
         ' 
         ' mnuRegistrarPago
         ' 
         mnuRegistrarPago.Name = "mnuRegistrarPago"
-        mnuRegistrarPago.Size = New Size(259, 34)
+        mnuRegistrarPago.Size = New Size(169, 22)
         mnuRegistrarPago.Text = "Registrar pagos"
         ' 
         ' mnuHistorialPagos
         ' 
         mnuHistorialPagos.Name = "mnuHistorialPagos"
-        mnuHistorialPagos.Size = New Size(259, 34)
+        mnuHistorialPagos.Size = New Size(169, 22)
         mnuHistorialPagos.Text = "Historial de pagos"
         ' 
         ' mnuHorarios
         ' 
         mnuHorarios.DropDownItems.AddRange(New ToolStripItem() {mnuGestionarHorarios, mnuActividades, mnuInstructores, mnuSalas})
         mnuHorarios.Name = "mnuHorarios"
-        mnuHorarios.Size = New Size(96, 29)
+        mnuHorarios.Size = New Size(64, 20)
         mnuHorarios.Text = "Horarios"
         ' 
         ' mnuGestionarHorarios
         ' 
         mnuGestionarHorarios.Name = "mnuGestionarHorarios"
-        mnuGestionarHorarios.Size = New Size(259, 34)
+        mnuGestionarHorarios.Size = New Size(170, 22)
         mnuGestionarHorarios.Text = "Gestionar horarios"
         ' 
         ' mnuActividades
         ' 
         mnuActividades.Name = "mnuActividades"
-        mnuActividades.Size = New Size(259, 34)
+        mnuActividades.Size = New Size(170, 22)
         mnuActividades.Text = "Actividades"
         ' 
         ' mnuInstructores
         ' 
         mnuInstructores.Name = "mnuInstructores"
-        mnuInstructores.Size = New Size(259, 34)
+        mnuInstructores.Size = New Size(170, 22)
         mnuInstructores.Text = "Instructores"
         ' 
         ' mnuSalas
         ' 
         mnuSalas.Name = "mnuSalas"
-        mnuSalas.Size = New Size(259, 34)
+        mnuSalas.Size = New Size(170, 22)
         mnuSalas.Text = "Salas"
         ' 
         ' mnuSistema
         ' 
         mnuSistema.DropDownItems.AddRange(New ToolStripItem() {mnuUsuarios, mnuBitacora, mnuCambiarContrasena, mnuCerrarSesion, mnuSalir})
         mnuSistema.Name = "mnuSistema"
-        mnuSistema.Size = New Size(90, 29)
+        mnuSistema.Size = New Size(60, 20)
         mnuSistema.Text = "Sistema"
         ' 
         ' mnuUsuarios
         ' 
         mnuUsuarios.Name = "mnuUsuarios"
-        mnuUsuarios.Size = New Size(271, 34)
+        mnuUsuarios.Size = New Size(180, 22)
         mnuUsuarios.Text = "Usuarios"
         ' 
         ' mnuBitacora
         ' 
         mnuBitacora.Name = "mnuBitacora"
-        mnuBitacora.Size = New Size(271, 34)
+        mnuBitacora.Size = New Size(180, 22)
         mnuBitacora.Text = "Bitácora"
         ' 
         ' mnuCambiarContrasena
         ' 
         mnuCambiarContrasena.Name = "mnuCambiarContrasena"
-        mnuCambiarContrasena.Size = New Size(271, 34)
+        mnuCambiarContrasena.Size = New Size(180, 22)
         mnuCambiarContrasena.Text = "Cambiar contraseña"
         ' 
         ' mnuCerrarSesion
         ' 
         mnuCerrarSesion.Name = "mnuCerrarSesion"
-        mnuCerrarSesion.Size = New Size(271, 34)
+        mnuCerrarSesion.Size = New Size(180, 22)
         mnuCerrarSesion.Text = "Cerrar sesión "
         ' 
         ' mnuSalir
         ' 
         mnuSalir.Name = "mnuSalir"
-        mnuSalir.Size = New Size(271, 34)
+        mnuSalir.Size = New Size(180, 22)
         mnuSalir.Text = "Salir"
         ' 
         ' stsPrincipal
         ' 
         stsPrincipal.ImageScalingSize = New Size(24, 24)
         stsPrincipal.Items.AddRange(New ToolStripItem() {lblUsuario, lblRol})
-        stsPrincipal.Location = New Point(0, 718)
+        stsPrincipal.Location = New Point(0, 427)
         stsPrincipal.Name = "stsPrincipal"
-        stsPrincipal.Padding = New Padding(1, 0, 20, 0)
-        stsPrincipal.Size = New Size(1143, 32)
+        stsPrincipal.Size = New Size(800, 22)
         stsPrincipal.TabIndex = 1
         stsPrincipal.Text = "StatusStrip1"
         ' 
         ' lblUsuario
         ' 
         lblUsuario.Name = "lblUsuario"
-        lblUsuario.Size = New Size(76, 25)
+        lblUsuario.Size = New Size(50, 17)
         lblUsuario.Text = "Usuario:"
         ' 
         ' lblRol
         ' 
         lblRol.Name = "lblRol"
-        lblRol.Size = New Size(41, 25)
+        lblRol.Size = New Size(27, 17)
         lblRol.Text = "Rol:"
         ' 
         ' pnlContenido
         ' 
         pnlContenido.Controls.Add(lblBienvenida)
         pnlContenido.Dock = DockStyle.Fill
-        pnlContenido.Location = New Point(0, 35)
-        pnlContenido.Margin = New Padding(4, 5, 4, 5)
+        pnlContenido.Location = New Point(0, 24)
         pnlContenido.Name = "pnlContenido"
-        pnlContenido.Size = New Size(1143, 683)
+        pnlContenido.Size = New Size(800, 403)
         pnlContenido.TabIndex = 2
         ' 
         ' lblBienvenida
         ' 
+        lblBienvenida.Anchor = AnchorStyles.Top
         lblBienvenida.AutoSize = True
         lblBienvenida.Font = New Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblBienvenida.Location = New Point(326, 32)
-        lblBienvenida.Margin = New Padding(4, 0, 4, 0)
+        lblBienvenida.Location = New Point(239, 27)
         lblBienvenida.Name = "lblBienvenida"
-        lblBienvenida.Size = New Size(424, 48)
+        lblBienvenida.Size = New Size(288, 32)
         lblBienvenida.TabIndex = 3
         lblBienvenida.Text = "Bienvenido a GymControl"
         ' 
         ' frmPrincipal
         ' 
-        AutoScaleDimensions = New SizeF(10F, 25F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1143, 750)
+        ClientSize = New Size(800, 449)
         Controls.Add(pnlContenido)
         Controls.Add(stsPrincipal)
         Controls.Add(menuPrincipal)
         MainMenuStrip = menuPrincipal
-        Margin = New Padding(4, 5, 4, 5)
         Name = "frmPrincipal"
         StartPosition = FormStartPosition.CenterScreen
         Text = "GymControl - Sistema de Gestión"
