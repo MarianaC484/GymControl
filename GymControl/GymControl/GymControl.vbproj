@@ -46,4 +46,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="docs\" />
+    <Folder Include="Recursos\" />
+  </ItemGroup>
+
 </Project>
