@@ -1,328 +1,169 @@
-﻿Imports GymControl.Seguridad
-
-Public Class frmPrincipal
+﻿Public Class frmPrincipal
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    End Sub
 
-        ' Mostrar información de la sesión actual
-        lblBienvenida.Text = "Bienvenido/a, " & Sesion.NombreUsuario
+    ' ==============================
+    ' SOCIOS
+    ' ==============================
 
-        lblUsuario.Text = "Usuario: " & Sesion.NombreUsuario
-        lblRol.Text = "Rol: " & ObtenerNombreRol(Sesion.Rol)
 
-        ' Formulario principal maximizado
-        Me.WindowState = FormWindowState.Maximized
 
-        ' El panel ocupa el espacio disponible
-        pnlContenido.Dock = DockStyle.Fill
-
+    Private Sub mnuConsultarSocios_Click(sender As Object, e As EventArgs) Handles mnuConsultarSocios.Click
+        Dim formulario As New frmPortalSocios()
+        formulario.Show()
     End Sub
 
 
-    ' ==========================================
-    ' CONVERTIR ID DEL ROL A NOMBRE
-    ' ==========================================
-    Private Function ObtenerNombreRol(idRol As String) As String
+    ' ==============================
+    ' MEMBRESÍAS
+    ' ==============================
 
-        Select Case idRol
-
-            Case "1"
-                Return "Administrador"
-
-            Case "2"
-                Return "Recepcionista"
-
-            Case "3"
-                Return "Instructor"
-
-            Case Else
-                Return "Usuario"
-
-        End Select
-
-    End Function
-
-
-    ' ==========================================
-    ' SOCIOS - GESTIONAR
-    ' ==========================================
-    Private Sub mnuGestionarSocios_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuGestionarSocios.Click
-
-        Dim formulario As New frmSocios()
-
-        formulario.ShowDialog()
-
+    Private Sub mnuGestionarMembresias_Click(sender As Object, e As EventArgs) Handles mnuGestionarMembresias.Click
+        Dim formulario As New frmMembresiasPagos()
+        formulario.Show()
     End Sub
 
 
-    ' ==========================================
-    ' SOCIOS - CONSULTAR
-    ' ==========================================
-    Private Sub mnuConsultarSocios_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuConsultarSocios.Click
+    ' ==============================
+    ' PAGOS
+    ' ==============================
 
-        Dim formulario As New frmSocios()
-
-        formulario.ShowDialog()
-
+    Private Sub mnuRegistrarPagos_Click(sender As Object, e As EventArgs) Handles mnuRegistrarPago.Click
+        Dim formulario As New frmMembresiasPagos()
+        formulario.Show()
     End Sub
 
 
-    ' ==========================================
-    ' MEMBRESÍAS - GESTIONAR
-    ' ==========================================
-    Private Sub mnuGestionarMembresias_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuGestionarMembresias.Click
+    ' ==============================
+    ' HORARIOS
+    ' ==============================
 
-        MessageBox.Show(
-            "El módulo de Membresías estará disponible próximamente.",
-            "GymControl",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
+    Private Sub mnuGestionarHorarios_Click(sender As Object, e As EventArgs) Handles mnuGestionarHorarios.Click
+        Dim formulario As New FrmHorarios()
+        formulario.Show()
     End Sub
 
 
-    ' ==========================================
+    ' ==============================
     ' TIPOS DE MEMBRESÍA
-    ' ==========================================
-    Private Sub mnuTiposMembresia_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuTiposMembresia.Click
+    ' ==============================
 
+    Private Sub mnuTiposMembresia_Click(sender As Object, e As EventArgs) Handles mnuTiposMembresia.Click
         MessageBox.Show(
-            "El módulo de Tipos de Membresía estará disponible próximamente.",
-            "GymControl",
+            "El formulario de Tipos de Membresía todavía no está disponible.",
+            "Módulo pendiente",
             MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
+            MessageBoxIcon.Information)
     End Sub
 
 
-    ' ==========================================
-    ' PAGOS - REGISTRAR
-    ' ==========================================
-    Private Sub mnuRegistrarPago_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuRegistrarPago.Click
+    ' ==============================
+    ' HISTORIAL DE PAGOS
+    ' ==============================
 
+    Private Sub mnuHistorialPagos_Click(sender As Object, e As EventArgs) Handles mnuHistorialPagos.Click
         MessageBox.Show(
-            "El módulo de Pagos estará disponible próximamente.",
-            "GymControl",
+            "El formulario de Historial de Pagos todavía no está disponible.",
+            "Módulo pendiente",
             MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
+            MessageBoxIcon.Information)
     End Sub
 
 
-    ' ==========================================
-    ' PAGOS - HISTORIAL
-    ' ==========================================
-    Private Sub mnuHistorialPagos_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuHistorialPagos.Click
-
-        MessageBox.Show(
-            "El historial de pagos estará disponible próximamente.",
-            "GymControl",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
-    End Sub
-
-
-    ' ==========================================
-    ' HORARIOS - GESTIONAR
-    ' ==========================================
-    Private Sub mnuGestionarHorarios_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuGestionarHorarios.Click
-
-        MessageBox.Show(
-            "El módulo de Horarios estará disponible próximamente.",
-            "GymControl",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
-    End Sub
-
-
-    ' ==========================================
+    ' ==============================
     ' ACTIVIDADES
-    ' ==========================================
-    Private Sub mnuActividades_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuActividades.Click
+    ' ==============================
 
+    Private Sub mnuActividades_Click(sender As Object, e As EventArgs) Handles mnuActividades.Click
         MessageBox.Show(
-            "El módulo de Actividades estará disponible próximamente.",
-            "GymControl",
+            "El formulario de Actividades todavía no está disponible.",
+            "Módulo pendiente",
             MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
+            MessageBoxIcon.Information)
     End Sub
 
 
-    ' ==========================================
+    ' ==============================
     ' INSTRUCTORES
-    ' ==========================================
-    Private Sub mnuInstructores_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuInstructores.Click
+    ' ==============================
 
+    Private Sub mnuInstructores_Click(sender As Object, e As EventArgs) Handles mnuInstructores.Click
         MessageBox.Show(
-            "El módulo de Instructores estará disponible próximamente.",
-            "GymControl",
+            "El formulario de Instructores todavía no está disponible.",
+            "Módulo pendiente",
             MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
+            MessageBoxIcon.Information)
     End Sub
 
 
-    ' ==========================================
+    ' ==============================
     ' SALAS
-    ' ==========================================
-    Private Sub mnuSalas_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuSalas.Click
+    ' ==============================
 
+    Private Sub mnuSalas_Click(sender As Object, e As EventArgs) Handles mnuSalas.Click
         MessageBox.Show(
-            "El módulo de Salas estará disponible próximamente.",
-            "GymControl",
+            "El formulario de Salas todavía no está disponible.",
+            "Módulo pendiente",
             MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
+            MessageBoxIcon.Information)
     End Sub
 
 
-    ' ==========================================
-    ' USUARIOS
-    ' ==========================================
-    Private Sub mnuUsuarios_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuUsuarios.Click
-
+    Private Sub mnuBitacora_Click(sender As Object, e As EventArgs) Handles mnuBitacora.Click
         MessageBox.Show(
-            "El módulo de Usuarios estará disponible próximamente.",
-            "GymControl",
+            "El formulario de Bitácora todavía no está disponible.",
+            "Módulo pendiente",
             MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
+            MessageBoxIcon.Information)
+    End Sub
 
+    Private Sub mnuCambiarContrasena_Click(sender As Object, e As EventArgs) Handles mnuCambiarContrasena.Click
+        MessageBox.Show(
+            "El cambio de contraseña todavía no está disponible.",
+            "Módulo pendiente",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information)
     End Sub
 
 
-    ' ==========================================
-    ' BITÁCORA
-    ' ==========================================
-    Private Sub mnuBitacora_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuBitacora.Click
-
-        MessageBox.Show(
-            "El módulo de Bitácora estará disponible próximamente.",
-            "GymControl",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
-    End Sub
-
-
-    ' ==========================================
-    ' CAMBIAR CONTRASEÑA
-    ' ==========================================
-    Private Sub mnuCambiarContrasena_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuCambiarContrasena.Click
-
-        MessageBox.Show(
-            "El cambio de contraseña estará disponible próximamente.",
-            "GymControl",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
-
-    End Sub
-
-
-    ' ==========================================
+    ' ==============================
     ' CERRAR SESIÓN
-    ' ==========================================
-    Private Sub mnuCerrarSesion_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuCerrarSesion.Click
+    ' ==============================
 
+    Private Sub mnuCerrarSesion_Click(sender As Object, e As EventArgs) Handles mnuCerrarSesion.Click
         Dim respuesta As DialogResult = MessageBox.Show(
-            "¿Está seguro de que desea cerrar la sesión?",
+            "¿Desea cerrar la sesión actual?",
             "Cerrar sesión",
             MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        )
+            MessageBoxIcon.Question)
 
         If respuesta = DialogResult.Yes Then
-
-            Sesion.UsuarioId = 0
-            Sesion.NombreUsuario = ""
-            Sesion.Rol = ""
-
-            Me.Hide()
-
             Dim login As New frmLogin()
-            login.ShowDialog()
-
+            login.Show()
             Me.Close()
-
         End If
-
     End Sub
 
 
-    ' ==========================================
-    ' SALIR DEL SISTEMA
-    ' ==========================================
-    Private Sub mnuSalir_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles mnuSalir.Click
+    ' ==============================
+    ' SALIR
+    ' ==============================
 
-        Dim respuesta As DialogResult = MessageBox.Show(
-            "¿Está seguro de que desea salir de GymControl?",
-            "Salir",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        )
-
-        If respuesta = DialogResult.Yes Then
-            Application.Exit()
-        End If
-
+    Private Sub mnuSalir_Click(sender As Object, e As EventArgs) Handles mnuSalir.Click
+        Application.Exit()
     End Sub
 
+    Private Sub mnuGestionarSocios_Click(sender As Object, e As EventArgs) Handles mnuGestionarSocios.Click
+        Dim formulario As New frmSocios()
+        formulario.Show()
+    End Sub
+
+    Private Sub mnuUsuarios_Click(sender As Object, e As EventArgs) Handles mnuUsuarios.Click
+
+        Dim formulario As New frmUsuarios()
+        formulario.ShowDialog()
+
+    End Sub
 End Class
+
