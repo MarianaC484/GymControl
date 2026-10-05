@@ -1,13 +1,12 @@
 ﻿Public Class frmPrincipal
 
+
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     End Sub
 
     ' ==============================
     ' SOCIOS
     ' ==============================
-
-
 
     Private Sub mnuConsultarSocios_Click(sender As Object, e As EventArgs) Handles mnuConsultarSocios.Click
         Dim formulario As New frmPortalSocios()
@@ -97,53 +96,20 @@
     End Sub
 
 
-    ' ==============================
-    ' SALAS
-    ' ==============================
-
-    Private Sub mnuSalas_Click(sender As Object, e As EventArgs) Handles mnuSalas.Click
-        MessageBox.Show(
-            "El formulario de Salas todavía no está disponible.",
-            "Módulo pendiente",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information)
-    End Sub
-
-
     Private Sub mnuBitacora_Click(sender As Object, e As EventArgs) Handles mnuBitacora.Click
-        MessageBox.Show(
-            "El formulario de Bitácora todavía no está disponible.",
-            "Módulo pendiente",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information)
+
+        Dim formulario As New frmBitacora()
+        formulario.ShowDialog()
+
     End Sub
 
     Private Sub mnuCambiarContrasena_Click(sender As Object, e As EventArgs) Handles mnuCambiarContrasena.Click
-        MessageBox.Show(
-            "El cambio de contraseña todavía no está disponible.",
-            "Módulo pendiente",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information)
+
+        Dim formulario As New frmCambiarContrasena()
+        formulario.ShowDialog()
+
     End Sub
 
-
-    ' ==============================
-    ' CERRAR SESIÓN
-    ' ==============================
-
-    Private Sub mnuCerrarSesion_Click(sender As Object, e As EventArgs) Handles mnuCerrarSesion.Click
-        Dim respuesta As DialogResult = MessageBox.Show(
-            "¿Desea cerrar la sesión actual?",
-            "Cerrar sesión",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question)
-
-        If respuesta = DialogResult.Yes Then
-            Dim login As New frmLogin()
-            login.Show()
-            Me.Close()
-        End If
-    End Sub
 
 
     ' ==============================
@@ -166,8 +132,39 @@
 
     End Sub
 
-    Private Sub pnlContenido_Paint(sender As Object, e As PaintEventArgs) Handles pnlContenido.Paint
+    Private Sub mnuSalas_Click(sender As Object, e As EventArgs) Handles mnuSalas.Click
+
+        Dim formulario As New frmSalas()
+        formulario.ShowDialog()
 
     End Sub
+
+
+    Private Sub mnuCerrarSesion_Click(
+    sender As Object,
+    e As EventArgs
+) Handles mnuCerrarSesion.Click
+
+        Dim respuesta As DialogResult =
+            MessageBox.Show(
+                "¿Desea cerrar la sesión actual?",
+                "Cerrar sesión",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            )
+
+        If respuesta = DialogResult.Yes Then
+
+            Sesion.CerrarSesion()
+
+            Dim login As New frmLogin()
+            login.Show()
+
+            Me.Close()
+
+        End If
+
+    End Sub
+
 End Class
 
