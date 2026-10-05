@@ -37,6 +37,7 @@ Partial Class frmCambiarContrasena
         ' 
         ' pnlTitulo
         ' 
+        pnlTitulo.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         pnlTitulo.BackColor = Color.FromArgb(CByte(192), CByte(255), CByte(255))
         pnlTitulo.Controls.Add(lblTitulo)
         pnlTitulo.Location = New Point(-3, 1)

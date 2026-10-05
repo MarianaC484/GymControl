@@ -75,7 +75,7 @@ Partial Class frmSalas
         ' 
         ' lblTitulo
         ' 
-        lblTitulo.Dock = DockStyle.Fill
+        lblTitulo.Dock = DockStyle.Top
         lblTitulo.Font = New Font("Segoe UI", 10F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         lblTitulo.Location = New Point(0, 0)
         lblTitulo.Name = "lblTitulo"
@@ -164,7 +164,7 @@ Partial Class frmSalas
         dgvSalas.RowHeadersVisible = False
         dgvSalas.RowHeadersWidth = 62
         dgvSalas.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvSalas.Size = New Size(984, 229)
+        dgvSalas.Size = New Size(984, 258)
         dgvSalas.TabIndex = 12
         ' 
         ' lblEstadoSalas

@@ -60,19 +60,6 @@
     End Sub
 
     ' ==============================
-    ' HISTORIAL DE PAGOS
-    ' ==============================
-
-    Private Sub mnuHistorialPagos_Click(sender As Object, e As EventArgs) Handles mnuHistorialPagos.Click
-        MessageBox.Show(
-            "El formulario de Historial de Pagos todavía no está disponible.",
-            "Módulo pendiente",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information)
-    End Sub
-
-
-    ' ==============================
     ' ACTIVIDADES
     ' ==============================
 
