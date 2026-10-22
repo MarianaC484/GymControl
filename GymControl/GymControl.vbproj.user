@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="Formularios\frmBitacora.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\frmCambiarContrasena.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\frmHorarios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\FrmMembresiasPagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\frmPortalSocios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\frmPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\frmSalas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\FrmSocios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\frmUsuarios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\FrmActividad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\FrmInstructores.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\FrmTipoDeMembresia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

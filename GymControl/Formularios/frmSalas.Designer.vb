@@ -75,7 +75,7 @@ Partial Class frmSalas
         ' 
         ' lblTitulo
         ' 
-        lblTitulo.Dock = DockStyle.Top
+        lblTitulo.Dock = DockStyle.Fill
         lblTitulo.Font = New Font("Segoe UI", 10F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         lblTitulo.Location = New Point(0, 0)
         lblTitulo.Name = "lblTitulo"

@@ -1198,23 +1198,25 @@ Public Class frmMembresiasPagos
     ' SELECCIONAR MEMBRESÍA
     ' ============================================================
 
-    Private Sub dgvMembresias_SelectionChanged(
-        sender As Object,
-        e As EventArgs
-    ) Handles dgvMembresias.SelectionChanged
+    Private Sub dgvMembresias_SelectionChanged(sender As Object, e As EventArgs) Handles dgvMembresias.SelectionChanged
 
-        If dgvMembresias.CurrentRow Is Nothing Then
+        If dgvMembresias.CurrentRow IsNot Nothing Then
+            Try
+                ' Usamos .Trim y .ToUpper para evitar fallos por mayúsculas o espacios extras
+                Dim estadoMembresia As String = dgvMembresias.CurrentRow.Cells("estado").Value.ToString().Trim().ToUpper()
 
-            Return
-
+                If estadoMembresia = "ACTIVA" Then
+                    btnConstancia.Enabled = True
+                Else
+                    btnConstancia.Enabled = False
+                End If
+            Catch ex As Exception
+                btnConstancia.Enabled = False
+            End Try
         End If
-
-
-        SeleccionarMembresia(
-            dgvMembresias.CurrentRow
-        )
-
     End Sub
+
+
 
 
     Private Sub SeleccionarMembresia(
@@ -1351,37 +1353,23 @@ Public Class frmMembresiasPagos
             End If
 
 
-            ' ----------------------------------------------------
-            ' OBTENER ID DEL USUARIO ACTUAL
-            ' ----------------------------------------------------
-            '
-            ' IMPORTANTE:
-            ' Aquí debe utilizarse el ID guardado por Sesion.vb.
-            '
-            ' Si tu Sesion usa otro nombre, lo ajustaremos.
-            ' ----------------------------------------------------
-
-            Dim idUsuario As Integer = 0
-
-            ' EJEMPLO:
-            ' idUsuario = Sesion.IdUsuario
+            Dim idUsuario As Integer = Sesion.UsuarioId
 
 
             If idUsuario = 0 Then
 
                 MessageBox.Show(
-                    "No se pudo identificar al usuario que registra el pago." &
-                    Environment.NewLine &
-                    "Debemos conectar este formulario con Sesion.vb.",
-                    "Sesión",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
+                   "No se pudo identificar al usuario que registra el pago." &
+                   Environment.NewLine &
+                   "Verifique que haya iniciado sesión correctamente en el sistema.",
+                   "Error de Sesión",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Warning
+               )
 
                 Return
 
             End If
-
 
             Using cn As MySqlConnection =
                 ConexionBD.ObtenerConexion()
@@ -1452,6 +1440,14 @@ Public Class frmMembresiasPagos
 
             CargarPagos()
 
+            If chkImprimirAlRegistrar.Checked Then
+
+                Dim tamañoTicket As New Printing.PaperSize("Ticket80mm", 315, 600)
+                pdRecibo.DefaultPageSettings.PaperSize = tamañoTicket
+                pdRecibo.DefaultPageSettings.Margins = New Printing.Margins(10, 10, 10, 10)
+
+                pdRecibo.Print()
+            End If
 
         Catch ex As Exception
 
@@ -2029,5 +2025,206 @@ Public Class frmMembresiasPagos
             dgvMembresias.Rows(indice).Cells(0)
 
     End Sub
+
+    Private Sub dgvPagos_SelectionChanged(sender As Object, e As EventArgs) Handles dgvPagos.SelectionChanged
+        btnImprimirRecibo.Enabled = (dgvPagos.SelectedRows.Count > 0)
+    End Sub
+
+    Private Sub btnConstancia_Click(sender As Object, e As EventArgs) Handles btnConstancia.Click
+        ' Enlazar el documento de la constancia membretada
+        ppdVista.Document = pdConstancia
+
+        ' Forzar a que abra maximizado en pantalla completa
+        CType(ppdVista, Form).WindowState = FormWindowState.Maximized
+
+        ' Mostrar la vista previa
+        ppdVista.ShowDialog()
+    End Sub
+
+    ' DIBUJO MANUAL DEL REPORTE R02 (CONSTANCIA EN HOJA CARTA)
+    Private Sub pdConstancia_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pdConstancia.PrintPage
+        Dim g As Graphics = e.Graphics
+        Dim y As Single = 100 ' Margen superior amplio para hoja membretada
+
+        Using fuenteTitulo As New Font("Arial", 16, FontStyle.Bold),
+              fuenteCuerpo As New Font("Arial", 12, FontStyle.Regular),
+              formatoCentro As New StringFormat() With {.Alignment = StringAlignment.Center}
+
+            ' 1. Dibujar Encabezado Institucional (Hoja Membretada)
+            g.DrawString("GIMNASIO TITÁN", fuenteTitulo, Brushes.Black, New RectangleF(100, y, 650, 30), formatoCentro)
+            y += 40
+            g.DrawString("CONSTANCIA DE MEMBRESÍA", fuenteCuerpo, Brushes.Black, New RectangleF(100, y, 650, 25), formatoCentro)
+            y += 80
+
+            ' 2. Texto formal (Se ajusta solo a los márgenes gracias al RectangleF)
+            Dim nombreSocio As String = txtNombreSocio.Text
+            Dim textoConstancia As String = $"Por medio de la presente, la administración del GIMNASIO TITÁN hace constar que el/la usuario(a) {nombreSocio} se encuentra actualmente registrado(a) bajo una membresía activa en nuestras instalaciones, gozando de pleno derecho de uso de las salas de musculación y clases grupales."
+
+            Dim rectCuerpo As New RectangleF(100, y, 650, 200)
+            g.DrawString(textoConstancia, fuenteCuerpo, Brushes.Black, rectCuerpo)
+            y += 220
+
+            ' 3. Línea de firma
+            g.DrawString("___________________________", fuenteCuerpo, Brushes.Black, New RectangleF(100, y, 650, 20), formatoCentro)
+            y += 25
+            g.DrawString("Administración Gimnasio Titán", fuenteCuerpo, Brushes.Black, New RectangleF(100, y, 650, 20), formatoCentro)
+
+            e.HasMorePages = False
+        End Using
+    End Sub
+
+
+    Private Sub btnImprimirRecibo_Click(sender As Object, e As EventArgs) Handles btnImprimirRecibo.Click
+        If dgvPagos.CurrentRow IsNot Nothing Then
+            ' CONFIGURACIÓN PARA TICKET DE 80MM
+            Dim tamanoTicket As New Printing.PaperSize("Ticket80mm", 315, 600)
+            pdRecibo.DefaultPageSettings.PaperSize = tamanoTicket
+            pdRecibo.DefaultPageSettings.Margins = New Printing.Margins(10, 10, 10, 10)
+
+            ' Enlazar y abrir visor
+            ppdVista.Document = pdRecibo
+            CType(ppdVista, Form).WindowState = FormWindowState.Maximized
+            ppdVista.ShowDialog()
+        End If
+    End Sub
+
+
+    ' DIBUJO REPORTE R01 (TICKET DE 80MM)
+
+    Private Sub pdRecibo_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pdRecibo.PrintPage
+
+        Dim g As Graphics = e.Graphics
+        Dim anchoTicket As Integer = 315 ' 80mm en centésimas de pulgada
+        Dim y As Single = 15
+
+        Using fuenteTitulo As New Font("Consolas", 12, FontStyle.Bold),
+              fuenteRegular As New Font("Consolas", 9, FontStyle.Regular),
+              formatoCentro As New StringFormat() With {.Alignment = StringAlignment.Center},
+              formatoDerecha As New StringFormat() With {.Alignment = StringAlignment.Far}
+
+            ' DIBUJAR LOGO CORPORATIVO 
+            Dim imagenLogo As Image = Nothing
+
+            Try
+
+                Dim rutaLogo As String = IO.Path.Combine(Application.StartupPath, "..", "..", "Recursos", "Logo.png")
+
+                If IO.File.Exists(rutaLogo) Then
+                    imagenLogo = Image.FromFile(rutaLogo)
+                Else
+
+                    rutaLogo = IO.Path.Combine(Application.StartupPath, "Recursos", "Logo.png")
+                    If IO.File.Exists(rutaLogo) Then imagenLogo = Image.FromFile(rutaLogo)
+                End If
+            Catch ex As Exception
+                imagenLogo = Nothing
+            End Try
+
+            If imagenLogo IsNot Nothing Then
+                g.DrawImage(imagenLogo, New Rectangle(132, CInt(y), 50, 50))
+                y += 55
+            End If
+
+
+            ' --- ENCABEZADO ---
+            g.DrawString("GIMNASIO TITÁN", fuenteTitulo, Brushes.Black, New RectangleF(0, y, anchoTicket, 20), formatoCentro)
+            y += 20
+            g.DrawString("Recibo de pago", fuenteRegular, Brushes.Black, New RectangleF(0, y, anchoTicket, 16), formatoCentro)
+            y += 20
+
+            g.DrawString("--------------------------------------------------", fuenteRegular, Brushes.Black, 10, y)
+            y += 15
+
+            ' --- DATOS DEL PAGO REAL ---
+            If dgvPagos.CurrentRow IsNot Nothing Then
+                Dim idRecibo As String = dgvPagos.CurrentRow.Cells("id_pago").Value.ToString().PadLeft(6, "0"c)
+                Dim fechaPago As String = Convert.ToDateTime(dgvPagos.CurrentRow.Cells("fecha_pago").Value).ToString("dd/MM/yyyy HH:mm")
+                Dim nombreSocio As String = txtNombreSocio.Text
+                Dim montoPago As Decimal = Convert.ToDecimal(dgvPagos.CurrentRow.Cells("monto").Value)
+                Dim metodo As String = dgvPagos.CurrentRow.Cells("metodo_pago").Value.ToString()
+
+                ' Nota: Extraemos cédula y saldo si están en tu grilla, si no, dejamos valores por defecto o variables
+                Dim cedula As String = "001-150398-0003K"
+                Dim saldoPendiente As Decimal = 0.00
+                Dim detallePlan As String = "Mensual 01/10 - 30/10/2026" ' Puedes concatenar fechas del formulario
+
+                ' Fila 1: N.° Recibo
+                g.DrawString("Recibo N.°", fuenteRegular, Brushes.Black, 15, y)
+                g.DrawString(idRecibo, fuenteRegular, Brushes.Black, New RectangleF(15, y, anchoTicket - 30, 16), formatoDerecha)
+                y += 16
+
+                ' Fila 2: Fecha
+                g.DrawString("Fecha", fuenteRegular, Brushes.Black, 15, y)
+                g.DrawString(fechaPago, fuenteRegular, Brushes.Black, New RectangleF(15, y, anchoTicket - 30, 16), formatoDerecha)
+                y += 16
+
+                ' Fila 3: Socio
+                g.DrawString($"Socio: {nombreSocio}", fuenteRegular, Brushes.Black, 15, y)
+                y += 16
+
+                ' Fila 4: Cédula
+                g.DrawString($"Cédula: {cedula}", fuenteRegular, Brushes.Black, 15, y)
+                y += 20
+
+                g.DrawString("--------------------------------------------------", fuenteRegular, Brushes.Black, 10, y)
+                y += 15
+
+                ' --- CUERPO / ABONOS ---
+                g.DrawString(detallePlan, fuenteRegular, Brushes.Black, 15, y)
+                y += 16
+
+                g.DrawString($"Abono ({metodo})", fuenteRegular, Brushes.Black, 15, y)
+                g.DrawString($"C$ {montoPago:N2}", fuenteRegular, Brushes.Black, New RectangleF(15, y, anchoTicket - 30, 16), formatoDerecha)
+                y += 16
+
+                ' Monto en letras
+                Dim montoEnLetras As String = ConvertirMontoALetras(montoPago)
+                g.DrawString(montoEnLetras.Replace("«", "").Replace("»", ""), fuenteRegular, Brushes.Black, 15, y)
+                y += 18
+
+                ' Saldo Pendiente
+                g.DrawString("Saldo pendiente", fuenteRegular, Brushes.Black, 15, y)
+                g.DrawString($"C$ {saldoPendiente:N2}", fuenteRegular, Brushes.Black, New RectangleF(15, y, anchoTicket - 30, 16), formatoDerecha)
+                y += 20
+
+                g.DrawString("--------------------------------------------------", fuenteRegular, Brushes.Black, 10, y)
+                y += 15
+
+                ' --- PIE DE PÁGINA ---
+                Dim usuarioActivo As String = If(Sesion.UsuarioId <> 0, "recepcion01", "recepcion01")
+                g.DrawString($"Atendió: {usuarioActivo}", fuenteRegular, Brushes.Black, New RectangleF(0, y, anchoTicket, 16), formatoCentro)
+                y += 16
+                g.DrawString("¡Gracias por entrenar con nosotros!", fuenteRegular, Brushes.Black, New RectangleF(0, y, anchoTicket, 16), formatoCentro)
+            End If
+
+            e.HasMorePages = False
+        End Using
+    End Sub
+
+
+
+
+    ' FUNCIÓN PARA CONVERTIR MONTOS DE DINERO A TEXTO
+
+    Private Function ConvertirMontoALetras(ByVal total As Decimal) As String
+        Dim entero As Long = Fix(total)
+        Dim centavos As Integer = CInt((total - entero) * 100)
+        Dim textoCentavos As String = $"{centavos:00}/100 C$"
+
+        Dim textoEntero As String = ""
+        Select Case entero
+            Case 0 : textoEntero = "Cero"
+            Case 50 : textoEntero = "Cincuenta"
+            Case 80 : textoEntero = "Ochenta"
+            Case 300 : textoEntero = "Trescientos"
+            Case 500 : textoEntero = "Quinientos"
+            Case 600 : textoEntero = "Seiscientos"
+            Case 800 : textoEntero = "Ochocientos"
+            Case 1000 : textoEntero = "Mil"
+            Case Else : textoEntero = entero.ToString()
+        End Select
+
+        Return $"«{textoEntero.ToLower()} córdobas netos"
+    End Function
 
 End Class
