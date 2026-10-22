@@ -2031,43 +2031,79 @@ Public Class frmMembresiasPagos
     End Sub
 
     Private Sub btnConstancia_Click(sender As Object, e As EventArgs) Handles btnConstancia.Click
-        ' Enlazar el documento de la constancia membretada
-        ppdVista.Document = pdConstancia
+        If dgvMembresias.CurrentRow IsNot Nothing Then
+            ' CONFIGURACIÓN PARA HOJA TAMAÑO CARTA (LETTER)
+            For Each tipoPapel As Printing.PaperSize In pdConstancia.PrinterSettings.PaperSizes
+                If tipoPapel.Kind = Printing.PaperKind.Letter Then
+                    pdConstancia.DefaultPageSettings.PaperSize = tipoPapel
+                    Exit For
+                End If
+            Next
 
-        ' Forzar a que abra maximizado en pantalla completa
-        CType(ppdVista, Form).WindowState = FormWindowState.Maximized
+            ' Forzar márgenes estándar de oficina (1 pulgada = 100 centésimas)
+            pdConstancia.DefaultPageSettings.Margins = New Printing.Margins(100, 100, 100, 100)
 
-        ' Mostrar la vista previa
-        ppdVista.ShowDialog()
+            ' Enlazar el documento de la constancia membretada
+            ppdVista.Document = pdConstancia
+
+            ' Forzar a que abra maximizado en pantalla completa
+            CType(ppdVista, Form).WindowState = FormWindowState.Maximized
+
+            ' Mostrar la vista previa
+            ppdVista.ShowDialog()
+        Else
+            MessageBox.Show("Por favor, seleccione una membresía del historial superior.", "GymControl", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
     End Sub
+
 
     ' DIBUJO MANUAL DEL REPORTE R02 (CONSTANCIA EN HOJA CARTA)
     Private Sub pdConstancia_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pdConstancia.PrintPage
         Dim g As Graphics = e.Graphics
-        Dim y As Single = 100 ' Margen superior amplio para hoja membretada
+        Dim y As Single = 120
+        Dim anchoUtil As Single = 650
 
-        Using fuenteTitulo As New Font("Arial", 16, FontStyle.Bold),
+        Using fuenteTitulo As New Font("Arial", 18, FontStyle.Bold),
+              fuenteSubtitulo As New Font("Arial", 13, FontStyle.Bold),
               fuenteCuerpo As New Font("Arial", 12, FontStyle.Regular),
               formatoCentro As New StringFormat() With {.Alignment = StringAlignment.Center}
 
             ' 1. Dibujar Encabezado Institucional (Hoja Membretada)
-            g.DrawString("GIMNASIO TITÁN", fuenteTitulo, Brushes.Black, New RectangleF(100, y, 650, 30), formatoCentro)
-            y += 40
-            g.DrawString("CONSTANCIA DE MEMBRESÍA", fuenteCuerpo, Brushes.Black, New RectangleF(100, y, 650, 25), formatoCentro)
+            g.DrawString("GIMNASIO TITÁN", fuenteTitulo, Brushes.Black, New RectangleF(100, y, anchoUtil, 30), formatoCentro)
+            y += 35
+            g.DrawString("CONSTANCIA DE MEMBRESÍA", fuenteSubtitulo, Brushes.Black, New RectangleF(100, y, anchoUtil, 25), formatoCentro)
             y += 80
 
-            ' 2. Texto formal (Se ajusta solo a los márgenes gracias al RectangleF)
-            Dim nombreSocio As String = txtNombreSocio.Text
-            Dim textoConstancia As String = $"Por medio de la presente, la administración del GIMNASIO TITÁN hace constar que el/la usuario(a) {nombreSocio} se encuentra actualmente registrado(a) bajo una membresía activa en nuestras instalaciones, gozando de pleno derecho de uso de las salas de musculación y clases grupales."
+            ' 2. Extracción y validación de datos de la tabla superior de membresías
+            If dgvMembresias.CurrentRow IsNot Nothing Then
+                Dim nombreSocio As String = txtNombreSocio.Text.Trim()
 
-            Dim rectCuerpo As New RectangleF(100, y, 650, 200)
-            g.DrawString(textoConstancia, fuenteCuerpo, Brushes.Black, rectCuerpo)
-            y += 220
+                Dim fechaInicio As DateTime = Convert.ToDateTime(dgvMembresias.CurrentRow.Cells("fecha_inicio").Value)
+                Dim fechaVence As DateTime = Convert.ToDateTime(dgvMembresias.CurrentRow.Cells("fecha_vencimiento").Value)
+                Dim estadoPlan As String = dgvMembresias.CurrentRow.Cells("estado").Value.ToString().Trim().ToUpper()
 
-            ' 3. Línea de firma
-            g.DrawString("___________________________", fuenteCuerpo, Brushes.Black, New RectangleF(100, y, 650, 20), formatoCentro)
-            y += 25
-            g.DrawString("Administración Gimnasio Titán", fuenteCuerpo, Brushes.Black, New RectangleF(100, y, 650, 20), formatoCentro)
+                ' Redacción del texto formal dinámico
+                Dim textoConstancia As String =
+                    $"Por medio de la presente, la administración del GIMNASIO TITÁN hace constar que el/la usuario(a) " &
+                    $"{nombreSocio.ToUpper()}, se encuentra debidamente registrado(a) bajo una membresía con estado actual '{estadoPlan}' " &
+                    $"en nuestro sistema de gestión.{Environment.NewLine}{Environment.NewLine}" &
+                    $"Dicho plan cuenta con una vigencia oficial que dio inicio el {fechaInicio:dd 'de' MMMM 'del' yyyy} " &
+                    $"y finalizará el próximo {fechaVence:dd 'de' MMMM 'del' yyyy}, gozando de pleno derecho de uso de nuestras salas " &
+                    $"de musculación y áreas de entrenamiento.{Environment.NewLine}{Environment.NewLine}" &
+                    $"Se extiende la presente a solicitud del interesado para los fines que estime convenientes, en la ciudad de Estelí, " &
+                    $"Nicaragua, el {DateTime.Today:dd 'de' MMMM 'del' yyyy}."
+
+                Dim rectCuerpo As New RectangleF(100, y, anchoUtil, 350)
+                g.DrawString(textoConstancia, fuenteCuerpo, Brushes.Black, rectCuerpo)
+                y += 280
+
+                ' 3. Sección de Firma
+                g.DrawString("___________________________", fuenteCuerpo, Brushes.Black, New RectangleF(100, y, anchoUtil, 20), formatoCentro)
+                y += 25
+                g.DrawString("Administración Gimnasio Titán", fuenteCuerpo, Brushes.Black, New RectangleF(100, y, anchoUtil, 20), formatoCentro)
+            Else
+                g.DrawString("Error: No hay datos de membresía disponibles para graficar.", fuenteCuerpo, Brushes.Red, 100, y)
+            End If
 
             e.HasMorePages = False
         End Using
