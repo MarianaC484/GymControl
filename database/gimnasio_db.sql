@@ -6,7 +6,6 @@ CREATE DATABASE gimnasio_db
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_spanish_ci;
 
--- 3. Decirle a HeidiSQL que use esta base de datos a partir de ahora
 USE gimnasio_db;
 
 -- 4. Creación de la tabla roles
@@ -334,6 +333,118 @@ INSERT INTO horarios (id_instructor, id_actividad, id_sala, dia_semana, hora_ini
 (1, 5, 1, 6, '09:00:00', '10:00:00', 1), 
 (2, 1, 2, 6, '11:00:00', '12:00:00', 1);
 
+USE gimnasio_db;
+
+-- ============================================================
+-- 1. AMPLIAR SOCIOS (Completar de 15 a 30 socios)
+-- ============================================================
+INSERT INTO socios (cedula, nombres, apellidos, fecha_nacimiento, genero, telefono, correo, direccion, activo) VALUES
+('001-010100-1001A', 'Kevin Jose', 'Mendoza Perez', '2000-01-01', 'M', '8888-0001', 'kevin.mendoza@email.com', 'Esteli', 1),
+('001-020200-1002B', 'Mariana Lucia', 'Cruz Sevilla', '2001-02-02', 'F', '8888-0002', 'mariana.cruz@email.com', 'Managua', 1),
+('001-030300-1003C', 'Ernesto Jose', 'Castillo Rivas', '1995-03-03', 'M', '8888-0003', 'ernesto.castillo@email.com', 'Leon', 1),
+('001-040400-1004D', 'Sofia Alejandra', 'Flores Moran', '1998-04-04', 'F', '8888-0004', 'sofia.flores@email.com', 'Chinandega', 1),
+('001-050500-1005E', 'Diego Armando', 'Gomez Estrada', '1992-05-05', 'M', '8888-0005', 'diego.gomez@email.com', 'Masaya', 1),
+('001-060600-1006F', 'Valeria Isabel', 'Torres Benavides', '1997-06-06', 'F', '8888-0006', 'valeria.torres@email.com', 'Granada', 1),
+('001-070700-1007G', 'Gabriel Omar', 'Rios Centeno', '1994-07-07', 'M', '8888-0007', 'gabriel.rios@email.com', 'Matagalpa', 1),
+('001-080800-1008H', 'Camila Victoria', 'Mejia Rocha', '2002-08-08', 'F', '8888-0008', 'camila.mejia@email.com', 'Jinotega', 1),
+('001-090900-1009I', 'Rodrigo Martin', 'Pineda Duarte', '1993-09-09', 'M', '8888-0009', 'rodrigo.pineda@email.com', 'Esteli', 1),
+('001-101000-1010J', 'Natalia Beatriz', 'Aguilar Reyes', '1999-10-10', 'F', '8888-0010', 'natalia.aguilar@email.com', 'Managua', 1),
+('001-111100-1011K', 'Adrian Felipe', 'Nunez Urbina', '1996-11-11', 'M', '8888-0011', 'adrian.nunez@email.com', 'Leon', 1),
+('001-121200-1012L', 'Isabella Maria', 'Salazar Godoy', '2000-12-12', 'F', '8888-0012', 'isabella.salazar@email.com', 'Chinandega', 1),
+('001-131300-1013M', 'Mateo Nicolas', 'Mora Blandon', '2003-01-13', 'M', '8888-0013', 'mateo.mora@email.com', 'Masaya', 1),
+('001-141400-1014N', 'Lucia Fernanda', 'Lumbi Jarquin', '1991-02-14', 'F', '8888-0014', 'lucia.lumbi@email.com', 'Granada', 1),
+('001-151500-1015P', 'Jorge Isaac', 'Espinoza Mairena', '1988-03-15', 'M', '8888-0015', 'jorge.espinoza@email.com', 'Esteli', 1);
+
+-- ============================================================
+-- 2. AMPLIAR HORARIOS (Completar de 15 a 20 registros)
+-- ============================================================
+INSERT INTO horarios (id_instructor, id_actividad, id_sala, dia_semana, hora_inicio, hora_fin, activo) VALUES
+(1, 1, 1, 1, '10:00:00', '11:00:00', 1),
+(2, 2, 2, 2, '10:00:00', '11:00:00', 1),
+(3, 3, 3, 3, '10:00:00', '11:00:00', 1),
+(4, 4, 1, 4, '10:00:00', '11:00:00', 1),
+(1, 5, 2, 5, '10:00:00', '11:00:00', 1);
+
+-- ============================================================
+-- 3. AMPLIAR MEMBRESIAS (Completar de 15 a 40 registros)
+-- ============================================================
+INSERT INTO membresias (id_socio, id_tipo, fecha_inicio, fecha_vencimiento, precio_pactado, estado) VALUES
+-- Vencidas últimos 3 meses
+(16, 3, '2026-07-01', '2026-07-31', 800.00, 'Vencida'),
+(17, 3, '2026-07-15', '2026-08-15', 800.00, 'Vencida'),
+(18, 2, '2026-08-01', '2026-08-08', 250.00, 'Vencida'),
+(19, 3, '2026-08-10', '2026-09-10', 800.00, 'Vencida'),
+(20, 4, '2026-05-01', '2026-08-01', 2200.00, 'Vencida'),
+(21, 3, '2026-08-20', '2026-09-20', 800.00, 'Vencida'),
+(22, 1, '2026-09-01', '2026-09-02', 80.00, 'Vencida'),
+(23, 3, '2026-08-25', '2026-09-25', 800.00, 'Vencida'),
+-- Activas por vencer en los próximos 30 días
+(24, 3, '2026-09-28', '2026-10-28', 800.00, 'Activa'),
+(25, 3, '2026-10-01', '2026-11-01', 800.00, 'Activa'),
+(26, 2, '2026-10-15', '2026-10-22', 250.00, 'Activa'),
+(27, 3, '2026-10-05', '2026-11-05', 800.00, 'Activa'),
+(28, 4, '2026-08-15', '2026-11-15', 2200.00, 'Activa'),
+(29, 3, '2026-10-10', '2026-11-10', 800.00, 'Activa'),
+(30, 5, '2026-02-01', '2027-02-01', 7800.00, 'Activa'),
+(16, 3, '2026-10-01', '2026-11-01', 800.00, 'Activa'),
+(17, 3, '2026-10-02', '2026-11-02', 800.00, 'Activa'),
+(18, 3, '2026-10-03', '2026-11-03', 800.00, 'Activa'),
+(19, 3, '2026-10-04', '2026-11-04', 800.00, 'Activa'),
+(20, 3, '2026-10-05', '2026-11-05', 800.00, 'Activa'),
+(21, 3, '2026-10-06', '2026-11-06', 800.00, 'Activa'),
+(22, 3, '2026-10-07', '2026-11-07', 800.00, 'Activa'),
+(23, 3, '2026-10-08', '2026-11-08', 800.00, 'Activa'),
+(24, 2, '2026-10-18', '2026-10-25', 250.00, 'Activa'),
+(25, 2, '2026-10-19', '2026-10-26', 250.00, 'Activa');
+
+-- ============================================================
+-- 4. AMPLIAR PAGOS (Completar a 80 registros con variaciones)
+-- ============================================================
+INSERT INTO pagos (id_membresia, id_usuario_registro, monto, fecha_pago, metodo_pago, referencia, observacion, anulado) VALUES
+-- Mayo 2026
+(20, 2, 1000.00, '2026-05-01 09:00:00', 'Efectivo', NULL, 'Abono 1', 0),
+(20, 2, 1200.00, '2026-05-15 10:00:00', 'Tarjeta', 'REC-501', 'Abono 2', 0),
+-- Junio 2026
+(9, 2, 7800.00, '2026-06-01 08:30:00', 'Transferencia', 'TX-601', 'Pago completo', 0),
+(16, 2, 400.00, '2026-06-10 11:00:00', 'Efectivo', NULL, 'Abono parcial', 0),
+(16, 2, 400.00, '2026-06-25 15:00:00', 'Efectivo', NULL, 'Cancelacion', 0),
+-- Julio 2026
+(16, 2, 800.00, '2026-07-01 09:15:00', 'Tarjeta', 'REC-701', 'Pago mensual', 0),
+(17, 2, 800.00, '2026-07-15 14:20:00', 'Efectivo', NULL, 'Pago mensual', 0),
+(1, 2, 800.00, '2026-07-20 16:00:00', 'Transferencia', 'TX-702', 'Pago', 0),
+(2, 2, 250.00, '2026-07-22 08:10:00', 'Efectivo', NULL, 'Semanal', 0),
+(3, 2, 80.00, '2026-07-25 12:00:00', 'Efectivo', NULL, 'Diario', 0),
+-- Agosto 2026
+(18, 2, 250.00, '2026-08-01 10:00:00', 'Efectivo', NULL, 'Pago semanal', 0),
+(19, 2, 400.00, '2026-08-10 09:00:00', 'Efectivo', NULL, 'Abono 1', 0),
+(19, 2, 400.00, '2026-08-20 11:30:00', 'Efectivo', NULL, 'Abono 2', 0),
+(21, 2, 800.00, '2026-08-20 17:00:00', 'Tarjeta', 'REC-801', 'Pago completo', 0),
+(23, 2, 800.00, '2026-08-25 18:00:00', 'Transferencia', 'TX-802', 'Pago mensual', 0),
+-- Septiembre 2026
+(22, 2, 80.00, '2026-09-01 08:00:00', 'Efectivo', NULL, 'Diario', 0),
+(24, 2, 800.00, '2026-09-28 09:00:00', 'Tarjeta', 'REC-901', 'Pago mensual', 0),
+(28, 2, 1100.00, '2026-09-15 10:30:00', 'Transferencia', 'TX-902', 'Abono 1 trimestral', 0),
+(28, 2, 1100.00, '2026-09-30 14:00:00', 'Efectivo', NULL, 'Abono 2 trimestral', 0),
+(29, 2, 800.00, '2026-09-10 15:30:00', 'Efectivo', NULL, 'Pago mensual', 0),
+-- Octubre 2026
+(25, 2, 800.00, '2026-10-01 08:00:00', 'Efectivo', NULL, 'Pago mensual', 0),
+(26, 2, 250.00, '2026-10-15 09:30:00', 'Tarjeta', 'REC-1001', 'Pago semanal', 0),
+(27, 2, 800.00, '2026-10-05 11:00:00', 'Transferencia', 'TX-1002', 'Pago mensual', 0),
+(30, 2, 7800.00, '2026-10-02 12:00:00', 'Transferencia', 'TX-1003', 'Pago anual', 0),
+(31, 2, 800.00, '2026-10-01 13:00:00', 'Efectivo', NULL, 'Pago mensual', 0),
+(32, 2, 800.00, '2026-10-02 14:00:00', 'Efectivo', NULL, 'Pago mensual', 0),
+(33, 2, 800.00, '2026-10-03 15:00:00', 'Tarjeta', 'REC-1004', 'Pago mensual', 0),
+(34, 2, 800.00, '2026-10-04 16:00:00', 'Efectivo', NULL, 'Pago mensual', 0),
+(35, 2, 800.00, '2026-10-05 17:00:00', 'Transferencia', 'TX-1005', 'Pago mensual', 0),
+(36, 2, 800.00, '2026-10-06 08:30:00', 'Efectivo', NULL, 'Pago mensual', 0),
+(37, 2, 800.00, '2026-10-07 09:30:00', 'Tarjeta', 'REC-1006', 'Pago mensual', 0),
+(38, 2, 800.00, '2026-10-08 10:30:00', 'Efectivo', NULL, 'Pago mensual', 0),
+(39, 2, 250.00, '2026-10-18 11:30:00', 'Efectivo', NULL, 'Pago semanal', 0),
+(40, 2, 250.00, '2026-10-19 12:30:00', 'Transferencia', 'TX-1007', 'Pago semanal', 0),
+-- Pagos Anulados adicionales (para llegar a al menos 4 anulados)
+(17, 2, 800.00, '2026-07-15 14:00:00', 'Tarjeta', 'REC-00002', 'ERROR DIGITACION', 1),
+(21, 2, 800.00, '2026-08-20 16:50:00', 'Efectivo', NULL, 'PAGO DUPLICADO', 1),
+(27, 2, 800.00, '2026-10-05 10:50:00', 'Tarjeta', 'REC-00003', 'TRANSACCION RECHAZADA', 1);
 
 
 -- =============================================================================
