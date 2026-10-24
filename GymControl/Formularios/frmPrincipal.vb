@@ -153,5 +153,14 @@
 
     End Sub
 
+    Private Sub mnuCentroDeReportes_Click(sender As Object, e As EventArgs) Handles mnuCentroDeReportes.Click
+        Dim formulario As New frmCentroReportes()
+        formulario.ShowDialog()
+    End Sub
+
+    Private Sub mnuListadoDeVencimientoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuListadoDeVencimientoToolStripMenuItem.Click
+        Dim formulario As New FrmListadoVencimientos()
+        formulario.ShowDialog()
+    End Sub
 End Class
 

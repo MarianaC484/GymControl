@@ -42,6 +42,9 @@ Partial Class frmPrincipal
         mnuCambiarContrasena = New ToolStripMenuItem()
         mnuCerrarSesion = New ToolStripMenuItem()
         mnuSalir = New ToolStripMenuItem()
+        mnuReportes = New ToolStripMenuItem()
+        mnuCentroDeReportes = New ToolStripMenuItem()
+        mnuListadoDeVencimientoToolStripMenuItem = New ToolStripMenuItem()
         stsPrincipal = New StatusStrip()
         lblUsuario = New ToolStripStatusLabel()
         lblRol = New ToolStripStatusLabel()
@@ -55,7 +58,7 @@ Partial Class frmPrincipal
         ' menuPrincipal
         ' 
         menuPrincipal.ImageScalingSize = New Size(24, 24)
-        menuPrincipal.Items.AddRange(New ToolStripItem() {mnuSocios, mnuMembresias, mnuPagos, mnuHorarios, mnuSistema})
+        menuPrincipal.Items.AddRange(New ToolStripItem() {mnuSocios, mnuMembresias, mnuPagos, mnuHorarios, mnuSistema, mnuReportes})
         menuPrincipal.Location = New Point(0, 0)
         menuPrincipal.Name = "menuPrincipal"
         menuPrincipal.Padding = New Padding(9, 3, 0, 3)
@@ -111,7 +114,7 @@ Partial Class frmPrincipal
         ' mnuRegistrarPago
         ' 
         mnuRegistrarPago.Name = "mnuRegistrarPago"
-        mnuRegistrarPago.Size = New Size(270, 34)
+        mnuRegistrarPago.Size = New Size(238, 34)
         mnuRegistrarPago.Text = "Registrar pagos"
         ' 
         ' mnuHorarios
@@ -124,25 +127,25 @@ Partial Class frmPrincipal
         ' mnuGestionarHorarios
         ' 
         mnuGestionarHorarios.Name = "mnuGestionarHorarios"
-        mnuGestionarHorarios.Size = New Size(270, 34)
+        mnuGestionarHorarios.Size = New Size(259, 34)
         mnuGestionarHorarios.Text = "Gestionar horarios"
         ' 
         ' mnuActividades
         ' 
         mnuActividades.Name = "mnuActividades"
-        mnuActividades.Size = New Size(270, 34)
+        mnuActividades.Size = New Size(259, 34)
         mnuActividades.Text = "Actividades"
         ' 
         ' mnuInstructores
         ' 
         mnuInstructores.Name = "mnuInstructores"
-        mnuInstructores.Size = New Size(270, 34)
+        mnuInstructores.Size = New Size(259, 34)
         mnuInstructores.Text = "Instructores"
         ' 
         ' mnuSalas
         ' 
         mnuSalas.Name = "mnuSalas"
-        mnuSalas.Size = New Size(270, 34)
+        mnuSalas.Size = New Size(259, 34)
         mnuSalas.Text = "Salas"
         ' 
         ' mnuSistema
@@ -181,6 +184,25 @@ Partial Class frmPrincipal
         mnuSalir.Name = "mnuSalir"
         mnuSalir.Size = New Size(271, 34)
         mnuSalir.Text = "Salir"
+        ' 
+        ' mnuReportes
+        ' 
+        mnuReportes.DropDownItems.AddRange(New ToolStripItem() {mnuCentroDeReportes, mnuListadoDeVencimientoToolStripMenuItem})
+        mnuReportes.Name = "mnuReportes"
+        mnuReportes.Size = New Size(98, 29)
+        mnuReportes.Text = "Reportes"
+        ' 
+        ' mnuCentroDeReportes
+        ' 
+        mnuCentroDeReportes.Name = "mnuCentroDeReportes"
+        mnuCentroDeReportes.Size = New Size(297, 34)
+        mnuCentroDeReportes.Text = "Centro de reportes"
+        ' 
+        ' mnuListadoDeVencimientoToolStripMenuItem
+        ' 
+        mnuListadoDeVencimientoToolStripMenuItem.Name = "mnuListadoDeVencimientoToolStripMenuItem"
+        mnuListadoDeVencimientoToolStripMenuItem.Size = New Size(297, 34)
+        mnuListadoDeVencimientoToolStripMenuItem.Text = "Listado de vencimiento"
         ' 
         ' stsPrincipal
         ' 
@@ -276,4 +298,7 @@ Partial Class frmPrincipal
     Friend WithEvents mnuCambiarContrasena As ToolStripMenuItem
     Friend WithEvents mnuCerrarSesion As ToolStripMenuItem
     Friend WithEvents mnuSalir As ToolStripMenuItem
+    Friend WithEvents mnuReportes As ToolStripMenuItem
+    Friend WithEvents mnuCentroDeReportes As ToolStripMenuItem
+    Friend WithEvents mnuListadoDeVencimientoToolStripMenuItem As ToolStripMenuItem
 End Class

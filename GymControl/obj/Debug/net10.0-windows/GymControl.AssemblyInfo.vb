@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("GymControl"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c69620756beaa05da0c46b62d6be0a9ef8548a2"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3cdb9ebb73e8b5f1c04c12f552e22058916603b4"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("GymControl"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("GymControl"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _

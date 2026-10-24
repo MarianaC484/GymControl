@@ -10,8 +10,10 @@ C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.vbproj.A
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.FrmActividad.resources
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.frmBitacora.resources
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.frmCambiarContrasena.resources
+C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.frmCentroReportes.resources
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.frmHorarios.resources
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.FrmInstructores.resources
+C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.FrmListadoVencimientos.resources
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.frmLogin.resources
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.frmMembresiasPagos.resources
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.frmPortalSocios.resources
@@ -26,6 +28,7 @@ C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.Generate
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.AssemblyInfoInputs.cache
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.AssemblyInfo.vb
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.vbproj.CoreCompileInputs.cache
+C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.sourcelink.json
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.vbproj.Up2Date
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\GymControl.dll
 C:\proyectos\GymControl\GymControl\obj\Debug\net10.0-windows\refint\GymControl.dll

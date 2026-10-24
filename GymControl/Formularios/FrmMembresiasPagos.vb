@@ -2040,16 +2040,12 @@ Public Class frmMembresiasPagos
                 End If
             Next
 
-            ' Forzar márgenes estándar de oficina (1 pulgada = 100 centésimas)
             pdConstancia.DefaultPageSettings.Margins = New Printing.Margins(100, 100, 100, 100)
 
-            ' Enlazar el documento de la constancia membretada
             ppdVista.Document = pdConstancia
 
-            ' Forzar a que abra maximizado en pantalla completa
             CType(ppdVista, Form).WindowState = FormWindowState.Maximized
 
-            ' Mostrar la vista previa
             ppdVista.ShowDialog()
         Else
             MessageBox.Show("Por favor, seleccione una membresía del historial superior.", "GymControl", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -2057,24 +2053,32 @@ Public Class frmMembresiasPagos
     End Sub
 
 
-    ' DIBUJO MANUAL DEL REPORTE R02 (CONSTANCIA EN HOJA CARTA)
     Private Sub pdConstancia_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pdConstancia.PrintPage
         Dim g As Graphics = e.Graphics
-        Dim y As Single = 120
+        Dim y As Single = e.MarginBounds.Top
         Dim anchoUtil As Single = 650
+
+        ' 1. DIBUJAR LOGO CORPORATIVO
+        Dim logoGrafico As Image = My.Resources.Logo
+        If logoGrafico IsNot Nothing Then
+            Dim altoDeseado As Integer = 60
+            Dim anchoProporcional As Integer = CInt((logoGrafico.Width / logoGrafico.Height) * altoDeseado)
+
+            Dim centroX As Single = 100 + (anchoUtil / 2) - (anchoProporcional / 2)
+            g.DrawImage(logoGrafico, centroX, y, anchoProporcional, altoDeseado)
+            y += altoDeseado + 20
+        End If
 
         Using fuenteTitulo As New Font("Arial", 18, FontStyle.Bold),
               fuenteSubtitulo As New Font("Arial", 13, FontStyle.Bold),
               fuenteCuerpo As New Font("Arial", 12, FontStyle.Regular),
               formatoCentro As New StringFormat() With {.Alignment = StringAlignment.Center}
 
-            ' 1. Dibujar Encabezado Institucional (Hoja Membretada)
             g.DrawString("GIMNASIO TITÁN", fuenteTitulo, Brushes.Black, New RectangleF(100, y, anchoUtil, 30), formatoCentro)
             y += 35
             g.DrawString("CONSTANCIA DE MEMBRESÍA", fuenteSubtitulo, Brushes.Black, New RectangleF(100, y, anchoUtil, 25), formatoCentro)
             y += 80
 
-            ' 2. Extracción y validación de datos de la tabla superior de membresías
             If dgvMembresias.CurrentRow IsNot Nothing Then
                 Dim nombreSocio As String = txtNombreSocio.Text.Trim()
 
@@ -2117,7 +2121,6 @@ Public Class frmMembresiasPagos
             pdRecibo.DefaultPageSettings.PaperSize = tamanoTicket
             pdRecibo.DefaultPageSettings.Margins = New Printing.Margins(10, 10, 10, 10)
 
-            ' Enlazar y abrir visor
             ppdVista.Document = pdRecibo
             CType(ppdVista, Form).WindowState = FormWindowState.Maximized
             ppdVista.ShowDialog()
@@ -2125,12 +2128,9 @@ Public Class frmMembresiasPagos
     End Sub
 
 
-    ' DIBUJO REPORTE R01 (TICKET DE 80MM)
-
     Private Sub pdRecibo_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pdRecibo.PrintPage
-
         Dim g As Graphics = e.Graphics
-        Dim anchoTicket As Integer = 315 ' 80mm en centésimas de pulgada
+        Dim anchoTicket As Integer = 315
         Dim y As Single = 15
 
         Using fuenteTitulo As New Font("Consolas", 12, FontStyle.Bold),
@@ -2138,31 +2138,20 @@ Public Class frmMembresiasPagos
               formatoCentro As New StringFormat() With {.Alignment = StringAlignment.Center},
               formatoDerecha As New StringFormat() With {.Alignment = StringAlignment.Far}
 
-            ' DIBUJAR LOGO CORPORATIVO 
-            Dim imagenLogo As Image = Nothing
-
-            Try
-
-                Dim rutaLogo As String = IO.Path.Combine(Application.StartupPath, "..", "..", "Recursos", "Logo.png")
-
-                If IO.File.Exists(rutaLogo) Then
-                    imagenLogo = Image.FromFile(rutaLogo)
-                Else
-
-                    rutaLogo = IO.Path.Combine(Application.StartupPath, "Recursos", "Logo.png")
-                    If IO.File.Exists(rutaLogo) Then imagenLogo = Image.FromFile(rutaLogo)
-                End If
-            Catch ex As Exception
-                imagenLogo = Nothing
-            End Try
+            ' 1. DIBUJAR LOGO CORPORATIVO 
+            Dim imagenLogo As Image = My.Resources.Logo
 
             If imagenLogo IsNot Nothing Then
-                g.DrawImage(imagenLogo, New Rectangle(132, CInt(y), 50, 50))
-                y += 55
+                Dim altoDeseado As Integer = 50
+                Dim anchoProporcional As Integer = CInt((imagenLogo.Width / imagenLogo.Height) * altoDeseado)
+
+                Dim centroX As Single = (anchoTicket / 2) - (anchoProporcional / 2)
+
+                g.DrawImage(imagenLogo, centroX, y, anchoProporcional, altoDeseado)
+                y += altoDeseado + 15
             End If
 
-
-            ' --- ENCABEZADO ---
+            ' 2. ENCABEZADO DEL TICKET
             g.DrawString("GIMNASIO TITÁN", fuenteTitulo, Brushes.Black, New RectangleF(0, y, anchoTicket, 20), formatoCentro)
             y += 20
             g.DrawString("Recibo de pago", fuenteRegular, Brushes.Black, New RectangleF(0, y, anchoTicket, 16), formatoCentro)
@@ -2171,7 +2160,7 @@ Public Class frmMembresiasPagos
             g.DrawString("--------------------------------------------------", fuenteRegular, Brushes.Black, 10, y)
             y += 15
 
-            ' --- DATOS DEL PAGO REAL ---
+            ' 3. EXTRACCIÓN Y DIBUJO DE DATOS DEL PAGO REAL
             If dgvPagos.CurrentRow IsNot Nothing Then
                 Dim idRecibo As String = dgvPagos.CurrentRow.Cells("id_pago").Value.ToString().PadLeft(6, "0"c)
                 Dim fechaPago As String = Convert.ToDateTime(dgvPagos.CurrentRow.Cells("fecha_pago").Value).ToString("dd/MM/yyyy HH:mm")
@@ -2179,10 +2168,9 @@ Public Class frmMembresiasPagos
                 Dim montoPago As Decimal = Convert.ToDecimal(dgvPagos.CurrentRow.Cells("monto").Value)
                 Dim metodo As String = dgvPagos.CurrentRow.Cells("metodo_pago").Value.ToString()
 
-                ' Nota: Extraemos cédula y saldo si están en tu grilla, si no, dejamos valores por defecto o variables
                 Dim cedula As String = "001-150398-0003K"
                 Dim saldoPendiente As Decimal = 0.00
-                Dim detallePlan As String = "Mensual 01/10 - 30/10/2026" ' Puedes concatenar fechas del formulario
+                Dim detallePlan As String = "Mensual 01/10 - 30/10/2026"
 
                 ' Fila 1: N.° Recibo
                 g.DrawString("Recibo N.°", fuenteRegular, Brushes.Black, 15, y)
@@ -2205,7 +2193,7 @@ Public Class frmMembresiasPagos
                 g.DrawString("--------------------------------------------------", fuenteRegular, Brushes.Black, 10, y)
                 y += 15
 
-                ' --- CUERPO / ABONOS ---
+                ' 4. CUERPO / ABONOS
                 g.DrawString(detallePlan, fuenteRegular, Brushes.Black, 15, y)
                 y += 16
 
@@ -2213,12 +2201,9 @@ Public Class frmMembresiasPagos
                 g.DrawString($"C$ {montoPago:N2}", fuenteRegular, Brushes.Black, New RectangleF(15, y, anchoTicket - 30, 16), formatoDerecha)
                 y += 16
 
-                ' Monto en letras
-                Dim montoEnLetras As String = ConvertirMontoALetras(montoPago)
-                g.DrawString(montoEnLetras.Replace("«", "").Replace("»", ""), fuenteRegular, Brushes.Black, 15, y)
+                g.DrawString(ConvertirMontoALetras(montoPago), fuenteRegular, Brushes.Black, 15, y)
                 y += 18
 
-                ' Saldo Pendiente
                 g.DrawString("Saldo pendiente", fuenteRegular, Brushes.Black, 15, y)
                 g.DrawString($"C$ {saldoPendiente:N2}", fuenteRegular, Brushes.Black, New RectangleF(15, y, anchoTicket - 30, 16), formatoDerecha)
                 y += 20
@@ -2226,8 +2211,8 @@ Public Class frmMembresiasPagos
                 g.DrawString("--------------------------------------------------", fuenteRegular, Brushes.Black, 10, y)
                 y += 15
 
-                ' --- PIE DE PÁGINA ---
-                Dim usuarioActivo As String = If(Sesion.UsuarioId <> 0, "recepcion01", "recepcion01")
+                ' 5. PIE DE PÁGINA
+                Dim usuarioActivo As String = "recepcion01"
                 g.DrawString($"Atendió: {usuarioActivo}", fuenteRegular, Brushes.Black, New RectangleF(0, y, anchoTicket, 16), formatoCentro)
                 y += 16
                 g.DrawString("¡Gracias por entrenar con nosotros!", fuenteRegular, Brushes.Black, New RectangleF(0, y, anchoTicket, 16), formatoCentro)
@@ -2236,31 +2221,5 @@ Public Class frmMembresiasPagos
             e.HasMorePages = False
         End Using
     End Sub
-
-
-
-
-    ' FUNCIÓN PARA CONVERTIR MONTOS DE DINERO A TEXTO
-
-    Private Function ConvertirMontoALetras(ByVal total As Decimal) As String
-        Dim entero As Long = Fix(total)
-        Dim centavos As Integer = CInt((total - entero) * 100)
-        Dim textoCentavos As String = $"{centavos:00}/100 C$"
-
-        Dim textoEntero As String = ""
-        Select Case entero
-            Case 0 : textoEntero = "Cero"
-            Case 50 : textoEntero = "Cincuenta"
-            Case 80 : textoEntero = "Ochenta"
-            Case 300 : textoEntero = "Trescientos"
-            Case 500 : textoEntero = "Quinientos"
-            Case 600 : textoEntero = "Seiscientos"
-            Case 800 : textoEntero = "Ochocientos"
-            Case 1000 : textoEntero = "Mil"
-            Case Else : textoEntero = entero.ToString()
-        End Select
-
-        Return $"«{textoEntero.ToLower()} córdobas netos"
-    End Function
 
 End Class

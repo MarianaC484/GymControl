@@ -82,7 +82,7 @@ Partial Class FrmMembresiasPagos
         grpSocio.Controls.Add(btnBuscarSocio)
         grpSocio.Controls.Add(txtCedula)
         grpSocio.Controls.Add(lblCedula)
-        grpSocio.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0)
+        grpSocio.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         grpSocio.Location = New Point(17, 35)
         grpSocio.Margin = New Padding(4, 5, 4, 5)
         grpSocio.Name = "grpSocio"
@@ -114,7 +114,7 @@ Partial Class FrmMembresiasPagos
         ' 
         ' btnBuscarSocio
         ' 
-        btnBuscarSocio.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0)
+        btnBuscarSocio.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnBuscarSocio.Location = New Point(410, 47)
         btnBuscarSocio.Margin = New Padding(4, 5, 4, 5)
         btnBuscarSocio.Name = "btnBuscarSocio"
@@ -125,7 +125,7 @@ Partial Class FrmMembresiasPagos
         ' 
         ' txtCedula
         ' 
-        txtCedula.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0)
+        txtCedula.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtCedula.Location = New Point(100, 47)
         txtCedula.Margin = New Padding(4, 5, 4, 5)
         txtCedula.Name = "txtCedula"
@@ -135,7 +135,7 @@ Partial Class FrmMembresiasPagos
         ' lblCedula
         ' 
         lblCedula.AutoSize = True
-        lblCedula.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0)
+        lblCedula.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblCedula.Location = New Point(24, 60)
         lblCedula.Margin = New Padding(4, 0, 4, 0)
         lblCedula.Name = "lblCedula"
@@ -496,20 +496,22 @@ Partial Class FrmMembresiasPagos
         ' 
         ' btnImprimirRecibo
         ' 
+        btnImprimirRecibo.AutoSize = True
         btnImprimirRecibo.Enabled = False
         btnImprimirRecibo.Location = New Point(41, 762)
         btnImprimirRecibo.Name = "btnImprimirRecibo"
-        btnImprimirRecibo.Size = New Size(169, 34)
+        btnImprimirRecibo.Size = New Size(169, 35)
         btnImprimirRecibo.TabIndex = 10
         btnImprimirRecibo.Text = "Imprimir Recibo"
         btnImprimirRecibo.UseVisualStyleBackColor = True
         ' 
         ' btnConstancia
         ' 
+        btnConstancia.AutoSize = True
         btnConstancia.Enabled = False
         btnConstancia.Location = New Point(228, 762)
         btnConstancia.Name = "btnConstancia"
-        btnConstancia.Size = New Size(112, 34)
+        btnConstancia.Size = New Size(112, 35)
         btnConstancia.TabIndex = 11
         btnConstancia.Text = "Constancia"
         btnConstancia.UseVisualStyleBackColor = True
